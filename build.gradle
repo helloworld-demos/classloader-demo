@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+
+version = '1.0-RELEASE'
+sourceCompatibility = 1.8
+
+war {
+    baseName = 'classloader-demo'
+    version = version
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.16.18'
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    compile group: 'com.google.guava', name: 'guava', version: '22.0'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+if (project.hasProperty('env')) {
+    println project.getProperty('env')
+
+    dependencies {
+        // ensure that the embedded servlet container doesn’t interfere with the servlet container to which the war file will be deployed.
+        // TODO does it actually work
+        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    }
+
+    switch (project.getProperty('env')) {
+        case 'glassfish-w-webAppClassLoader':
+            war {
+                from('src/main/resources/web-config/glassfish-web/with-webAppClassLoader') {
+                    include('glassfish-web.xml', 'web.xml')
+                    into('WEB-INF')
+                }
+            }
+            break
+        case 'glassfish-wo-webAppClassLoader':
+            war {
+                from('src/main/resources/web-config/glassfish-web/without-webAppClassLoader') {
+                    // TODO no web.xml
+                    include 'glassfish-web.xml'
+                    into('WEB-INF')
+                }
+            }
+            break
+        case 'tomcat':
+            break
+        default:
+            break
+    }
+}

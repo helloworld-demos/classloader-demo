@@ -1,0 +1,73 @@
+
+===============================================
+curl -X GET localhost:9001/classloader-demo/demo
+===============================================
+[ {
+  "className" : "java.lang.String",
+  "doesExist" : true,
+  "classLoaderName" : null,
+  "jarUrl" : null
+}, {
+  "className" : "com.google.common.math.BigIntegerMath",
+  "doesExist" : true,
+  "classLoaderName" : "WebappClassLoader (delegate=false; repositories=WEB-INF/classes/)",
+  "jarUrl" : "jar:file:/usr/glassfish4/glassfish/domains/domain1/applications/classloader-demo/WEB-INF/lib/guava-22.0.jar!/com/google/common/math/BigIntegerMath.class"
+}, {
+  "className" : "javax.ws.rs.core.Response",
+  "doesExist" : true,
+  "classLoaderName" : "javax.ws.rs-api [195]",
+  "jarUrl" : "bundle://195.0:1/javax/ws/rs/core/Response.class"
+}, {
+  "className" : "com.fasterxml.jackson.databind.ObjectMapper",
+  "doesExist" : true,
+  "classLoaderName" : "WebappClassLoader (delegate=false; repositories=WEB-INF/classes/)",
+  "jarUrl" : "jar:file:/usr/glassfish4/glassfish/domains/domain1/applications/classloader-demo/WEB-INF/lib/jackson-databind-2.8.8.jar!/com/fasterxml/jackson/databind/ObjectMapper.class"
+} ]
+===============================================
+curl -X GET localhost:9002/classloader-demo/demo
+===============================================
+[ {
+  "className" : "java.lang.String",
+  "doesExist" : true,
+  "classLoaderName" : null,
+  "jarUrl" : null
+}, {
+  "className" : "com.google.common.math.BigIntegerMath",
+  "doesExist" : true,
+  "classLoaderName" : "com.google.guava [274]",
+  "jarUrl" : "bundle://274.0:1/com/google/common/math/BigIntegerMath.class"
+}, {
+  "className" : "javax.ws.rs.core.Response",
+  "doesExist" : true,
+  "classLoaderName" : "javax.ws.rs-api [195]",
+  "jarUrl" : "bundle://195.0:1/javax/ws/rs/core/Response.class"
+}, {
+  "className" : "com.fasterxml.jackson.databind.ObjectMapper",
+  "doesExist" : true,
+  "classLoaderName" : "com.fasterxml.jackson.core.jackson-databind [276]",
+  "jarUrl" : "bundle://276.0:1/com/fasterxml/jackson/databind/ObjectMapper.class"
+} ]
+===============================================
+curl -X GET localhost:9003/classloader-demo/demo
+===============================================
+[ {
+  "className" : "java.lang.String",
+  "doesExist" : true,
+  "classLoaderName" : null,
+  "jarUrl" : null
+}, {
+  "className" : "com.google.common.math.BigIntegerMath",
+  "doesExist" : true,
+  "classLoaderName" : "ParallelWebappClassLoader\r\n  context: classloader-demo\r\n  delegate: false\r\n----------> Parent Classloader:\r\njava.net.URLClassLoader@4eec7777\r\n",
+  "jarUrl" : "jar:file:/usr/local/tomcat/webapps/classloader-demo/WEB-INF/lib/guava-22.0.jar!/com/google/common/math/BigIntegerMath.class"
+}, {
+  "className" : "javax.ws.rs.core.Response",
+  "doesExist" : false,
+  "classLoaderName" : null,
+  "jarUrl" : null
+}, {
+  "className" : "com.fasterxml.jackson.databind.ObjectMapper",
+  "doesExist" : true,
+  "classLoaderName" : "ParallelWebappClassLoader\r\n  context: classloader-demo\r\n  delegate: false\r\n----------> Parent Classloader:\r\njava.net.URLClassLoader@4eec7777\r\n",
+  "jarUrl" : "jar:file:/usr/local/tomcat/webapps/classloader-demo/WEB-INF/lib/jackson-databind-2.8.8.jar!/com/fasterxml/jackson/databind/ObjectMapper.class"
+} ]

@@ -1,0 +1,7 @@
+<!--
+This will let glassfish to use WebappClassLoader (delegate=false; repositories=WEB-INF/classes/) to load classes locally;
+Otherwise glassfish will try to load some classes from /modules (jackson), and it will lead to some dependency issues
+-->
+<glassfish-web-app>
+    <class-loader delegate="false"/>
+</glassfish-web-app>

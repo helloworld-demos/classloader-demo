@@ -1,0 +1,19 @@
+version: "3"
+services:
+  glassfish-w-webAppClassLoader:
+    image: "hw-demos/glassfish-w-webappclassloader"
+    ports:
+     - "9001:8080"
+    container_name: "demo-glassfish-w-webappclassloader"
+
+  glassfish-wo-webAppClassLoader:
+    image: "hw-demos/glassfish-wo-webappclassloader"
+    ports:
+     - "9002:8080"
+    container_name: "demo-glassfish-wo-webappclassloader"
+
+  tomcat:
+    image: "hw-demos/tomcat-classloader"
+    ports:
+     - "9003:8080"
+    container_name: "demo-tomcat-classloader"
