@@ -25,7 +25,7 @@ docker build -t hw-demos/glassfish-w-webappclassloader glassfish/.
 docker build -t hw-demos/glassfish-wo-webappclassloader glassfish/.
 
 # tomcat
-(cd .. && gradle -Ptomcat clean war -x test && cp ./build/libs/classloader-demo-*.war demo/tomcat/classloader-demo.war)
+(cd .. && gradle -Penv=tomcat clean war -x test && cp ./build/libs/classloader-demo-*.war demo/tomcat/classloader-demo.war)
 
 docker build -t hw-demos/tomcat-classloader tomcat/.
 

@@ -38,9 +38,9 @@ run those commands:
 (cd demo/ && ./demo.sh) && cat demo/result.log
 ```
 
-result is:
+result ([file](./demo/result.log)) is: 
 
-```l
+```
 ===============================================
 curl -X GET localhost:9001/classloader-demo/demo
 ===============================================

@@ -37,11 +37,8 @@ dependencies {
 }
 
 if (project.hasProperty('env')) {
-    println project.getProperty('env')
-
     dependencies {
         // ensure that the embedded servlet container doesn’t interfere with the servlet container to which the war file will be deployed.
-        // TODO does it actually work
         providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     }
 
@@ -49,7 +46,7 @@ if (project.hasProperty('env')) {
         case 'glassfish-w-webAppClassLoader':
             war {
                 from('src/main/resources/web-config/glassfish-web/with-webAppClassLoader') {
-                    include('glassfish-web.xml', 'web.xml')
+                    include 'glassfish-web.xml'
                     into('WEB-INF')
                 }
             }
@@ -57,7 +54,6 @@ if (project.hasProperty('env')) {
         case 'glassfish-wo-webAppClassLoader':
             war {
                 from('src/main/resources/web-config/glassfish-web/without-webAppClassLoader') {
-                    // TODO no web.xml
                     include 'glassfish-web.xml'
                     into('WEB-INF')
                 }
